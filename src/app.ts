@@ -1,16 +1,20 @@
 // Import dependencies
-const helmet = require("koa-helmet");
-const json = require("koa-json");
+// import helmet from "koa-helmet";
+// import json from "koa-json";
 
-const Koa = require("koa");
-// const bodyParser = require("koa-bodyparser");
-const compress = require("koa-compress");
-const logger = require("koa-logger");
-const cors = require("@koa/cors");
-const session = require("koa-session");
+import Koa from "koa";
+import bodyParser from "koa-bodyparser";
+import compress from "koa-compress";
+import logger from "koa-logger";
+import cors from "@koa/cors";
+import session from "koa-session";
+
+// Import middlewares
+import { logStartupInfo } from "./middlewares/logStartupInfo.middleware";
 
 // Import routes
 import router from "./routes";
+import { stripColors } from "colors";
 
 const app = new Koa();
 
@@ -18,7 +22,7 @@ app.use(logger());
 app.use(cors());
 // app.use(bodyParser());
 app.use(compress());
-app.keys = ["your-secret-key"]; // replace with your own secret key
+app.keys = ["mysecreatkey"]; // replace with your own secret key
 app.use(session(app));
 
 // Apply the routes to the app
@@ -26,12 +30,15 @@ app.use(router.routes());
 
 // response
 app.use((ctx: any) => {
-  ctx.body = "Hello Mew";
+  ctx.body = "Hello Homepage";
+
+  console.log(stripColors.blue("MewGreen"));
 });
 
-app.listen(3000);
-
-app.keys = ["myKey"];
+const PORT = process.env.PORT || "3000";
+app.listen(+PORT, () => {
+  logStartupInfo(+PORT); // Call the utility function to log the startup info
+});
 
 const CONFIG = {
   key: "koa.sess" /** (string) cookie key (default is koa.sess) */,
