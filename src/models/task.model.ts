@@ -28,12 +28,6 @@ const taskSchema = new Schema(
   {
     timestamps: true,
     versionKey: false,
-    toJSON: {
-      transform: function (doc, ret) {
-        // You can customize the transformation if needed
-        return ret;
-      },
-    },
   }
 );
 

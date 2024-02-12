@@ -1,6 +1,7 @@
 // const { Context } = require("koa");
 import Router from "koa-router";
-import mewRouter from "./task.route";
+import taskRouter from "./task.route";
+import workboxRouter from "./workbox.route";
 const router = new Router({
   prefix: "/api/v1", // Set the prefix here
 });
@@ -12,6 +13,7 @@ router.get("/", (ctx: any) => {
 });
 
 // all paths
-router.use(mewRouter.routes(), mewRouter.allowedMethods()); // /api/v1/version
+router.use(taskRouter.routes(), taskRouter.allowedMethods()); // /api/v1/version
+router.use(workboxRouter.routes(), workboxRouter.allowedMethods()); // /api/v1/version
 
 export default router;
