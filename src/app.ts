@@ -8,23 +8,23 @@ import compress from "koa-compress";
 import logger from "koa-logger";
 import cors from "@koa/cors";
 import session from "koa-session";
-
 // Import middlewares
 import { logStartupInfo } from "./middlewares/logStartupInfo.middleware";
 
 // Import routes
 import router from "./routes";
-import { stripColors } from "colors";
+import colors from "colors";
+import mongoose from "mongoose";
 
 const app = new Koa();
-
 app.use(logger());
 app.use(cors());
-// app.use(bodyParser());
+app.use(bodyParser());
 app.use(compress());
 app.keys = ["mysecreatkey"]; // replace with your own secret key
 app.use(session(app));
-
+// การเชื่อมต่อกับ MongoDB
+mongoose.connect("mongodb://root:4321@localhost:27017/");
 // Apply the routes to the app
 app.use(router.routes());
 
@@ -32,7 +32,7 @@ app.use(router.routes());
 app.use((ctx: any) => {
   ctx.body = "Hello Homepage";
 
-  console.log(stripColors.blue("MewGreen"));
+  console.log(colors.blue("MewGreen"));
 });
 
 const PORT = process.env.PORT || "3000";

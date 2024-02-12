@@ -44,39 +44,28 @@ export function logStartupInfo(port: number) {
   );
 }
 
-//logsMongodbUtil
-// export async function logsMongodbUtil({
-//   client,
-//   version,
-// }: {
-//   client: typeof mongoose;
-//   version: string;
-// }) {
-//   console.log(
-//     colors.magenta(
-//       padRight("MongoDB Connection", longestLabelLength) +
-//         ` -> ${mongoose.connection.host}:${mongoose.connection.port}`
-//     )
-//   );
-//   console.log(
-//     colors.magenta(
-//       padRight("MongoDB Server Version", longestLabelLength) + ` -> ${version}`
-//     )
-//   );
-//   console.log(
-//     colors.magenta(
-//       padRight("MongoDB Database Name", longestLabelLength) +
-//         ` -> ${mongoose.connection.name}`
-//     )
-//   );
-// }
-
-//logsRedisUtil
-// export function logsRedisUtil({ host, port }: { host: any; port: any }) {
-//   // console.log(colors.red(padRight("Connected to Redis", longestLabelLength)));
-//   console.log(
-//     colors.red(
-//       padRight("Redis Connection", longestLabelLength) + ` -> ${host}:${port}`
-//     )
-//   );
-// }
+export async function logsMongodbUtil({
+  client,
+  version,
+}: {
+  client: typeof mongoose;
+  version: string;
+}) {
+  console.log(
+    colors.magenta(
+      padRight("MongoDB Connection", longestLabelLength) +
+        ` -> ${mongoose.connection.host}:${mongoose.connection.port}`
+    )
+  );
+  console.log(
+    colors.magenta(
+      padRight("MongoDB Server Version", longestLabelLength) + ` -> ${version}`
+    )
+  );
+  console.log(
+    colors.magenta(
+      padRight("MongoDB Database Name", longestLabelLength) +
+        ` -> ${mongoose.connection.name}`
+    )
+  );
+}
