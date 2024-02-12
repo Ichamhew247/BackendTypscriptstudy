@@ -21,7 +21,8 @@ export async function createTask(
   detail: string,
   start_time: string,
   end_time: string,
-  due_date: string
+  due_date: string,
+  status: boolean
 ) {
   try {
     const newTaskData = {
@@ -31,6 +32,7 @@ export async function createTask(
       start_time,
       end_time,
       due_date,
+      status,
     };
 
     // Create a new task using the TaskModel and the extracted data

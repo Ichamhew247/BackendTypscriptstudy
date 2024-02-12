@@ -24,8 +24,15 @@ taskRouter.get("/", async (ctx: any) => {
 taskRouter.post("/", async (ctx: any) => {
   try {
     console.log("New task");
-    const { taskName, taskIcon, detail, start_time, end_time, due_date } =
-      ctx.request.body;
+    const {
+      taskName,
+      taskIcon,
+      detail,
+      start_time,
+      end_time,
+      due_date,
+      status,
+    } = ctx.request.body;
 
     const newTask = await TaskController.createTask(
       taskName,
@@ -33,7 +40,8 @@ taskRouter.post("/", async (ctx: any) => {
       detail,
       start_time,
       end_time,
-      due_date
+      due_date,
+      status
     );
 
     ctx.body = { newTask };
